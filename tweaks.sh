@@ -15,4 +15,7 @@ function rows2cols()
 {
   dfile=all_iops.txt
   for i in `seq 1 5`;do export val="";for j in 4k 8k 16k 32k 64k 128k 1024k;do iops=`grep "100 ${j} ${i}" $dfile |awk '{print $4}'`;export val="${val} ${iops}";done;echo ${i} $val;done;
+  
+  # Average
+  for i in 0 5 35 50 65 95 100;do for j in 4k 8k 16k 32k 64k 128k 1024k;do echo ${i}_${j};grep "^${i} ${j}" all_data.txt| awk '{if(NF==4){sum+=$4}else if(NF==5){sum+=$5}}END{print sum / NR}';done;done
 }
