@@ -23,5 +23,5 @@ function rows2cols()
   for i in 100 95 65 50 35 5 0; do for j in 4k 8k 16k 32k 64k 128k 1024k; do echo "${i} ${j} `grep "^${i} ${j}" onlywrites.txt|awk '{sum+=$4}' END {print sum / NR}`";done;done; > averages.txt
   
   # Formatted for excel sheet
-  for i in 100 95 65 50 35 5 0; do echo -n "${i},";echo $(grep "${i}" averages.txt|awk '{print $3}')|sed 's/ /,/g';done > formatted.txt
+  for i in 100 95 65 50 35 5 0; do echo -n "${i},";echo $(grep "^${i} " averages.txt|awk '{print $3}')|sed 's/ /,/g';done > formatted.txt
 }
