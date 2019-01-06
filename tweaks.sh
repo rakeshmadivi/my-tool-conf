@@ -18,4 +18,10 @@ function rows2cols()
   
   # Average
   for i in 0 5 35 50 65 95 100;do for j in 4k 8k 16k 32k 64k 128k 1024k;do echo ${i}_${j};grep "^${i} ${j}" all_data.txt| awk '{if(NF==4){sum+=$4}else if(NF==5){sum+=$5}}END{print sum / NR}';done;done
+  
+  # Averages
+  for i in 100 95 65 50 35 5 0; do for j in 4k 8k 16k 32k 64k 128k 1024k; do echo "${i} ${j} `grep "^${i} ${j}" onlywrites.txt|awk '{sum+=$4}' END {print sum / NR}`";done;done; > averages.txt
+  
+  # Formatted for excel sheet
+  for i in 100 95 65 50 35 5 0; do echo -n "${i},";echo $(grep "${i}" averages.txt|awk '{print $3}')|sed 's/ /,/g';done > formatted.txt
 }
