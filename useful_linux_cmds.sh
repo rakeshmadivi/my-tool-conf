@@ -40,3 +40,6 @@ health, boot loader)
  sudo nvme fw-commit /dev/nvme0n1 -s 1 -a 1 Expected result: Success activating firmware action:1 slot:1
  sudo nvme reset /dev/nvme0 Resets the nvme controller
  '
+# commands related to devices
+dd if=/dev/zero of=${HOME}/dd_generated.img
+blockdev --getbsz /dev/zero # To get block size of device
